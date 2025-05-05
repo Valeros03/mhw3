@@ -86,9 +86,14 @@ function onJson(json) {
         const track = document.createElement('div');
         track.classList.add('element-show');
   
+        const imgWrapper = document.createElement('div');
+        imgWrapper.classList.add('image-box');
+
         const img = document.createElement('img');
         img.src = selected_image;
         img.classList.add('album-icon')
+
+        imgWrapper.appendChild(img);
   
         const nomeTrack = document.createElement('p');
         nomeTrack.textContent = title;
@@ -99,7 +104,7 @@ function onJson(json) {
         caption.textContent = artistList;
         caption.classList.add('gray-text');
       
-        track.appendChild(img);
+        track.appendChild(imgWrapper);
         track.appendChild(playButton);
         track.appendChild(nomeTrack);
         track.append(caption);
@@ -184,7 +189,12 @@ function onJson(json) {
 
       const img = document.createElement('img');
       img.src = selected_image;
-      img.classList.add('album-icon')
+      img.classList.add('album-icon');
+
+      const imgWrapper = document.createElement('div');
+      imgWrapper.classList.add('image-box');
+
+      imgWrapper.appendChild(img);
 
       const nomeAlbum = document.createElement('p');
       nomeAlbum.textContent = title;
@@ -195,7 +205,7 @@ function onJson(json) {
       caption.textContent = artistList;
       caption.classList.add('gray-text');
     
-      album.appendChild(img);
+      album.appendChild(imgWrapper);
       album.appendChild(playButton);
       album.appendChild(nomeAlbum);
       album.append(caption);
@@ -248,8 +258,8 @@ function onTokenResponse(response)
 }
 
 
-const client_id = '';
-const client_secret = '';
+const client_id = '6ff7a41aaad1448694fea5650531aad1';
+const client_secret = 'fe88c9457d8c436cb8e8cfd1d0ccd402';
 
 let token;
 
