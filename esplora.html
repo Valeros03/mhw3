@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="mhw3.css"/>
+<script src="mhw3.js" defer></script>
+<script src="api.js" defer></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spotify</title>
+
+</head>
+
+<body>
+
+    <div class='hidden' id="dropdown-pam">
+        <a href="#">
+            <div>
+                <p class="open-sans">Premium</p>
+                <img src="https://img.icons8.com/?size=100&id=16139&format=png&color=FFFFFF" class="icon-image">
+            </div>
+        </a>
+        <a href="#">
+            <div>
+                <p class="open-sans">Assistenza</p>
+                <img src="https://img.icons8.com/?size=100&id=16139&format=png&color=FFFFFF" class="icon-image">
+            </div>
+        </a>
+        <a href="#">
+            <div>
+                <p class="open-sans">Download</p>
+                <img src="https://img.icons8.com/?size=100&id=16139&format=png&color=FFFFFF" class="icon-image">
+            </div>
+        </a>
+    </div>
+
+    <section id="modal-view" class="hidden">
+        <div id="artist-info">
+
+        </div>
+    </section>
+
+    <header class="header-page">
+       
+        <div class="exploration-group">
+
+        <div id="icon-space">
+
+            <a href="mhw3.html" id="header-spotify-link">
+                <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_White.png" class="icon-image">
+            </a>
+        
+        </div>
+
+        <div id="searching-bar">
+
+            <a href="mhw3.html" id="home-page-link">
+                
+                <img src="https://img.icons8.com/?size=100&id=83326&format=png&color=737373" id="home-page-icon">
+        
+            </a>
+
+
+            <button class="icon-button" id="search-button">
+                <img src="https://img.icons8.com/?size=100&id=7695&format=png&color=737373" class="searching-icon">
+            </button>
+
+            <form id="input-container" class="hover-highlighted">
+                
+                
+                <input type="text" placeholder="Cosa vuoi ascoltare?">
+                
+                <div class="splitter"></div>
+                <a href="esplora.html" class="icon-button">
+                <img src="https://img.icons8.com/?size=100&id=8UdGJMu2c9dS&format=png&color=737373" class="searching-icon">
+                </a>
+            </form>
+
+        </div>
+        </div>
+
+        <div id="util-group">
+        
+            <div id="pad-group">
+            <a href="#" class="gray-link open-sans"><strong>Premium</strong></a>
+            <a href="#" class="gray-link open-sans"><strong>Assistenza</strong></a>
+            <a href="#" class="gray-link open-sans"><strong>Download</strong></a>
+            </div>
+            <div class="splitter"></div>
+
+            <div id="download-area">
+                <img src="https://img.icons8.com/?size=100&id=83159&format=png&color=737373" id="download-icon">
+                <a href="#" class="gray-link open-sans"><strong>Installa app</strong></a>
+            </div>
+
+            <div id="authentication">
+                <a href="#" class="gray-link open-sans"><strong>Iscriviti</strong></a>
+                <button id="accedi" class="white-button open-sans"><strong>Accedi</strong></button>
+            </div>
+            <div id="menu">
+                <div></div>
+                <div></div>
+                <div></div>
+                </div>
+        </div>
+      
+       
+    </header>
+
+    <div id="center-page">
+    <section class="user-panel">
+
+            <header class="header-user-panel">
+                <p class="white-text open-sans"><strong>La tua libreria</strong></p>
+                <button id="new-playlist"><img src="https://img.icons8.com/?size=100&id=3220&format=png&color=737373" class="searching-icon"/></button>
+            
+            </header>
+    <section class="user-playlists">
+
+                <div class="new-element">
+                <div class="text-new-element">
+                    <p class="white-text open-sans"><strong>Crea la tua prima playlist</strong></p>
+                    <p class="white-text open-sans">è facile, ti aiuteremo</p>
+                </div>
+                <button>Crea playlist</button>
+                </div>
+
+           
+                <div class="new-element">
+                <div class="text-new-element">
+                    <p class="white-text open-sans"><strong>Cerca qualche podacast da seguire</strong></p>
+                    <p class="white-text open-sans">Ti aggiorneremo sui nuovi episodi</p>
+                </div>
+                <button>Sfoglia i podacast</button>
+               </div>
+    </section>
+
+        <footer class="info">
+            <span class="info-group">
+                <a href="#">Informazioni legali</a>
+                <a href="#">Sicurezza e Centro sulla privacy</a>
+            </span>
+            <span class="info-group">
+                <a href="#">Informativa sulla privacy</a>
+                <a href="#">Impostazioni cookie</a>
+                <a href="#">Info annunci</a>
+            </span>
+            <span class="info-group">
+            <a href="#">Accessibilità</a>
+            <a href="#" id="politica-cookie">Politica sui cookie</a>
+            </span>
+        </footer>
+        
+    </section>
+    
+    <nav id="dashboard">
+        <div id="content-show">
+            <section class="group-content">
+                <header class="section-header-dashboard">
+                    <a href="#" id="more-track" class="open-sans section-text"><strong>Brani</strong></a>
+                </header>
+                <div class="show-category" id="track-view">
+                    
+                </div>
+                
+            </section>
+            <section class="group-content">
+                <header class="section-header-dashboard">
+                    <a href="#" id="more-artist" class="open-sans section-text"><strong>Artisti</strong></a>
+                </header>
+                <div class="show-category" id="artist-view">
+                    
+                </div>
+                
+            </section>
+            <section class="group-content">
+                <header class="section-header-dashboard">
+                    <a href="#" id="more-album" class="open-sans section-text"><strong>Album</strong></a>
+                </header>
+                <div class="show-category" id="album-view">
+                    
+                </div>
+                
+            </section>
+            
+        </div>
+
+
+        <div id="footer-dash-section">
+            <div class="spotify-information">
+
+                <p class="white-text open-sans"><strong>Azienda</strong></p>
+                <a href="#" class="gray-link open-sans">Chi siamo</a>
+                <a href="#" class="gray-link open-sans">Opportunità di lavoro</a>
+                <a href="#" class="gray-link open-sans">For the Record</a>
+
+            </div>
+
+            <div class="spotify-information">
+
+                <p class="white-text open-sans"><strong>Comunity</strong></p>
+                <a href="#" class="gray-link open-sans">Per artisti</a>
+                <a href="#" class="gray-link open-sans">Sviluppatori</a>
+                <a href="#" class="gray-link open-sans">Pubblicità</a>
+                <a href="#" class="gray-link open-sans">Investitori</a>
+                <a href="#" class="gray-link open-sans">Venditori</a>
+
+            </div>
+
+            <div class="spotify-information">
+
+                <p class="white-text open-sans"><strong>Link utili</strong></p>
+                <a href="#" class="gray-link open-sans">Assistenza</a>
+                <a href="#" class="gray-link open-sans">App per cellulare gratuita</a>
+                <a href="#" class="gray-link open-sans">Diritti del consumatore</a>
+
+            </div>
+
+            <div class="spotify-information">
+
+                <p class="white-text open-sans"><strong>Piani Spotify</strong></p>
+                <a href="#" class="gray-link open-sans">Premium Individual</a>
+                <a href="#" class="gray-link open-sans">Premium Duo</a>
+                <a href="#" class="gray-link open-sans">Premium Family</a>
+                <a href="#" class="gray-link open-sans">Premium Student</a>
+                <a href="#" class="gray-link open-sans">Spotify Free</a>
+
+            </div>
+
+            <div class="flex-box-right">
+                <button class="icon-button gray-back">
+                    <img src="https://img.icons8.com/?size=100&id=32292&format=png&color=737373" class="searching-icon">
+                </button>
+                <button class="icon-button gray-back">
+                    <img src="https://img.icons8.com/?size=100&id=fJp7hepMryiw&format=png&color=737373" class="searching-icon">
+                </button>
+                <button class="icon-button gray-back">
+                    <img src="https://img.icons8.com/?size=100&id=118466&format=png&color=737373" class="searching-icon">
+                </button>
+            </div>
+
+        </div>
+
+    </nav>
+    </div>
+    <footer class="signin-banner">
+        <div id="banner-text">
+            <p><strong>Anteprima di Spotify</strong></p>
+            <p>Iscriviti per ricevere brani e podcast illimitati con annunci pubblicitari occasionali. Non è necessaria alcuna carta di credito.</p>
+        </div>
+
+        <button class="white-button">Inscriviti Gratis</button>
+    </footer>
+
+    
+</body>
+
+</html>
