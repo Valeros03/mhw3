@@ -258,8 +258,8 @@ function onTokenResponse(response)
 }
 
 
-const client_id = '6ff7a41aaad1448694fea5650531aad1';
-const client_secret = 'fe88c9457d8c436cb8e8cfd1d0ccd402';
+const client_id = '';
+const client_secret = '';
 
 let token;
 
