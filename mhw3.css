@@ -782,18 +782,3 @@ button.gray-back:hover{
     overflow-y: scroll;
 
   }
-
-  #generi-show{
-    display: flex;
-    justify-content:space-evenly;
-
-  }
-  .genere-wrap{
-
-    background-color: green;
-    margin: 8px;
-    border-radius: 8px;
-    width: 180px;
-    height: 100px;
-
-  }
