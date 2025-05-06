@@ -138,14 +138,12 @@ function search(event)
         searchingContent.classList.add('hidden');
         mainContent.classList.remove('hidden');
         bSearching = false;
-        console.log("Ricerca terminata");
         return;
     }
 
     
 
   const album_value = encodeURIComponent(value);
-  console.log('Eseguo ricerca: ' + album_value)
  
   fetch("https://api.spotify.com/v1/search?type=album,artist,track&q=" + album_value,
     {
@@ -169,17 +167,47 @@ function updateShowMore(valore){
 
 
   let currentArtist;
+
+  function HandleSearchResult(json) {
+
+
+    let title;
+    if(json.query.search[0]){
+        title = json.query.search[0].title;
+      fetch("https://it.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(title))
+        .then(onResponse)
+        .then(GetDescription);
+
+    }else{
+        const noBio = {
+            extract: "No Description"
+        }
+        GetDescription(noBio);
+    }
+
+    
+  }
+
 function GetDescription(json){
 
-  const imageSrc = currentArtist.images[0].url;
+  
+  let image;
+  
+
+
   const nomeArtist = createH2(currentArtist.name);
   const modalDescription = createParagraph(json.extract);
 
-  const image = createImage(imageSrc);
+  
   document.body.classList.add('no-scroll');
   modalView.style.top = window.pageYOffset + 'px';
   artistInfo.appendChild(nomeArtist);
-  artistInfo.appendChild(image);
+
+    if(currentArtist.images[0])
+    {
+        image = createImage(currentArtist.images[0].url);
+        artistInfo.appendChild(image);
+    }
   artistInfo.appendChild(modalDescription);
   modalView.classList.remove('hidden');
 
@@ -188,7 +216,10 @@ function GetDescription(json){
 function ArtistInfo(artist){
 
   currentArtist = artist;
-  fetch("https://it.wikipedia.org/api/rest_v1/page/summary/" + encodeURIComponent(artist.name)).then(onResponse).then(GetDescription)
+  let searchTerm = artist.name + " cantante";
+  let url = "https://it.wikipedia.org/w/api.php?action=query&list=search&srsearch=" + encodeURIComponent(searchTerm) + "&format=json&origin=*";
+
+  fetch(url).then(onResponse).then(HandleSearchResult)
 
    
 }
@@ -209,8 +240,6 @@ function onArtistClick(event){
 
 
 function onJson(json) {
-    console.log('JSON ricevuto');
-    console.log(json);
 
     const library = document.querySelector('#album-view');
     const artistCollection = document.querySelector('#artist-view');
@@ -225,11 +254,32 @@ function onJson(json) {
     const artistResults = json.artists.items;
     const trackResults = json.tracks.items;
 
-    let num_results = 6;
 
     
+    let num_album;
+    let num_artist_result;
+    let num_track;
 
-    for(let i=0; i<num_results; i++)
+    if(albumResults.length > 6){
+        num_album = 6;
+    }else{
+        num_album = albumResults.length;
+    }
+
+    if(artistResults.length > 6){
+        num_artist_result = 6;
+    }else{
+        num_artist_result = artistResults.length;
+    }
+
+    if(trackResults.length > 6){
+        num_track = 6;
+    }else{
+        num_track = trackResults.length;
+    }
+    
+
+    for(let i=0; i<num_track; i++)
       {
         const playButton = document.createElement('button');
         playButton.classList.add('icon-button');
@@ -251,7 +301,12 @@ function onJson(json) {
         for(let j=0; j<num_artist; j++){
           artistList += track_data.artists[j].name + " ";
         }
-        const selected_image = track_data.album.images[1].url;
+
+        const img = document.createElement('img');
+        img.classList.add('album-icon');
+
+        if(track_data.album.images)
+            img.src = track_data.album.images[1].url;
         
         const track = document.createElement('div');
         track.classList.add('element-show');
@@ -259,9 +314,7 @@ function onJson(json) {
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('image-box');
 
-        const img = document.createElement('img');
-        img.src = selected_image;
-        img.classList.add('album-icon')
+        
 
         imgWrapper.appendChild(img);
   
@@ -282,7 +335,7 @@ function onJson(json) {
   
       }
 
-    for(let i=0; i<num_results; i++)
+    for(let i=0; i<num_artist_result; i++)
     {
      
         const playButton = document.createElement('button');
@@ -299,8 +352,13 @@ function onJson(json) {
         const artist_data = artistResults[i]
        
         const title = artist_data.name;
-       
-        const selected_image = artist_data.images[0].url;
+
+        const img = document.createElement('img');
+        img.classList.add('artist-icon')
+
+        if(artist_data.images.length > 0)
+            img.src = artist_data.images[0].url;
+        
         
         const artist = document.createElement('div');
         artist.classList.add('element-show');
@@ -310,9 +368,7 @@ function onJson(json) {
         const imgWrapper = document.createElement('div');
         imgWrapper.classList.add('image-box');
 
-        const img = document.createElement('img');
-        img.src = selected_image;
-        img.classList.add('artist-icon')
+        
   
         imgWrapper.appendChild(img);
 
@@ -329,7 +385,7 @@ function onJson(json) {
     }
 
 
-    for(let i=0; i<num_results; i++)
+    for(let i=0; i<num_album; i++)
     {
    
 
@@ -352,14 +408,17 @@ function onJson(json) {
       for(let j=0; j<num_artist; j++){
         artistList += album_data.artists[j].name + " ";
       }
-      const selected_image = album_data.images[0].url;
+
+      const img = document.createElement('img');
+      img.classList.add('album-icon');
+
+        if(album_data.images.length > 0)
+            img.src = album_data.images[0].url;
       
       const album = document.createElement('div');
       album.classList.add('element-show');
 
-      const img = document.createElement('img');
-      img.src = selected_image;
-      img.classList.add('album-icon');
+      
 
       const imgWrapper = document.createElement('div');
       imgWrapper.classList.add('image-box');
@@ -394,7 +453,7 @@ function onJson(json) {
   }
 
   function onResponse(response) {
-    console.log('Risposta ricevuta');
+   
     return response.json();
   }
 
@@ -402,9 +461,9 @@ function onJson(json) {
 
 function onTokenJson(json)
 {
-  console.log(json)
+
   token = json.access_token;
-  console.log('Token: ' + token);
+ 
 }
 
 function onTokenResponse(response)
